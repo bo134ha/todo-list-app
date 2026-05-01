@@ -1,74 +1,123 @@
-📝 Todo List App - MVVM & Kotlin Flow
+# 📝 Todo List App — MVVM & Kotlin Flow
 
-A modern, reactive Android Todo application built with Kotlin and Jetpack Compose. This project serves as a showcase for Clean Architecture and MVVM, leveraging Kotlin Flow for a fully asynchronous and reactive data stream.
-🏗️ Architecture Overview
+A modern, reactive Android Todo application built with **Kotlin** and **Jetpack Compose**.
+This project showcases **Clean Architecture** with **MVVM**, leveraging **Kotlin Flow** for fully asynchronous and reactive data handling.
 
-The project follows the Clean Architecture pattern to ensure a scalable, testable, and maintainable codebase. It is divided into three primary layers:
-1. Data Layer (data/)
+---
 
-    Local: Implements Room Database to provide persistent storage. All DAO queries return Flow to ensure the UI stays in sync with the database.
+## 🏗️ Architecture Overview
 
-    Repository Implementation: Acts as the single source of truth, mediating between the local database and the domain layer.
+The project follows **Clean Architecture** to ensure scalability, testability, and maintainability.
+It is divided into three main layers:
 
-2. Domain Layer (domain/)
+### 1. Data Layer (`data/`)
 
-    Model: Contains pure Kotlin data classes representing the business entities.
+* **Local**
 
-    Repository Interfaces: Defines the contract for data operations, abstracting the data source from the business logic.
+  * Uses **Room Database** for persistent storage.
+  * All DAO queries return `Flow` to keep the UI automatically in sync with data changes.
 
-    Use Cases: Encapsulates specific business rules (e.g., GetSortedTasksUseCase). They interact with flows and apply transformations where necessary.
+* **Repository Implementation**
 
-3. UI Layer (ui/)
+  * Acts as the **single source of truth**.
+  * Bridges the gap between the local data source and the domain layer.
 
-    ViewModel: Manages the UI state by collecting data from Use Cases. It converts cold Flows into StateFlow or SharedFlow to be consumed by Compose.
+---
 
-    Screens: Built with Jetpack Compose, observing the UI state in a lifecycle-aware manner.
+### 2. Domain Layer (`domain/`)
 
-    Navigation: Handles the routing and screen transitions within the app.
-    
-🛠️ Tech Stack
+* **Model**
 
-    Language: Kotlin
+  * Pure Kotlin data classes representing business entities.
 
-    UI Framework: Jetpack Compose
+* **Repository Interfaces**
 
-    Reactive Streams: Kotlin Flow (StateFlow, SharedFlow)
+  * Define contracts for data operations.
+  * Decouple business logic from data sources.
 
-    Async Programming: Coroutines
+* **Use Cases**
 
-    Local Database: Room
+  * Encapsulate business rules (e.g., `GetSortedTasksUseCase`).
+  * Work with `Flow` and apply transformations as needed.
 
-    Architecture: MVVM + Clean Architecture
+---
 
-📂 Project Structure
+### 3. UI Layer (`ui/`)
 
-Based on the project's internal hierarchy:
-Plaintext
+* **ViewModel**
 
+  * Manages UI state.
+  * Collects data from use cases.
+  * Converts `Flow` into `StateFlow` or `SharedFlow`.
+
+* **Screens**
+
+  * Built with **Jetpack Compose**.
+  * Observe state in a lifecycle-aware way.
+
+* **Navigation**
+
+  * Handles routing and screen transitions.
+
+---
+
+## 🛠️ Tech Stack
+
+* **Language:** Kotlin
+* **UI Framework:** Jetpack Compose
+* **Reactive Streams:** Kotlin Flow (`StateFlow`, `SharedFlow`)
+* **Async Programming:** Coroutines
+* **Local Database:** Room
+* **Architecture:** MVVM + Clean Architecture
+
+---
+
+## 📂 Project Structure
+
+```plaintext
 com.boshra.mvvm
 ├── model
 │   ├── data
 │   │   ├── local      # Room DAO, Database & Entities
-│   │   ├── remote     # API/Network configurations (if any)
-│   │   └── repo       # Implementation of Domain Repositories
+│   │   ├── remote     # API / Network (optional)
+│   │   └── repo       # Repository implementations
 │   └── domain
-│       ├── model      # Business Logic Entities
-│       ├── repo       # Repository Interfaces
-│       └── use_case   # Business Logic/Use Cases
+│       ├── model      # Business entities
+│       ├── repo       # Repository interfaces
+│       └── use_case   # Business logic
 └── ui
-    ├── screens        # UI Components & Composables
-    │   ├── component  # Reusable UI widgets
-    │   └── navigation # App Navigation Graph
-    ├── view_model     # State Management via Flows
-    ├── theme          # Material3 Design System
-    └── MainActivity   # Entry Point
+    ├── screens
+    │   ├── component  # Reusable UI components
+    │   └── navigation # Navigation graph
+    ├── view_model     # State management (Flow)
+    ├── theme          # Material3 theme
+    └── MainActivity   # Entry point
+```
 
-🌊 Why Kotlin Flow?
+---
 
-This project utilizes Kotlin Flow to handle data streams because:
+## 🌊 Why Kotlin Flow?
 
-    Asynchronous Execution: Keeps the main thread free for UI rendering.
+* **Asynchronous Execution**
+  Keeps the main thread free for smooth UI rendering.
 
-    Backpressure Support: Handles large streams of data efficiently.
+* **Reactive Streams**
+  Automatically updates UI when data changes.
 
-    Lifecycle Awareness: When combined with collectAsStateWithLifecycle, it ensures that data collection only happens when the UI is active, saving battery and memory.
+* **Backpressure Handling**
+  Efficiently processes large streams of data.
+
+* **Lifecycle Awareness**
+  With `collectAsStateWithLifecycle`, data is collected only when the UI is active — saving battery and resources.
+
+---
+
+## ✨ Summary
+
+This project demonstrates how to build a **modern Android app** using:
+
+* Reactive programming with Flow
+* Clean separation of concerns
+* Scalable architecture patterns
+
+It serves as a solid foundation for real-world apps that require **maintainability, performance, and clean code structure**.
